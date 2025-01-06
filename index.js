@@ -1,6 +1,6 @@
 let player = {
-    name: "Jesus",
-    chips: 200
+    name: "Player",
+    chips: 500
 }
 
 let cards = []
@@ -17,6 +17,17 @@ let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
 
 playerEl.textContent = player.name + ": $" + player.chips
+
+function setPlayerName(){
+    const nameInput = document.getElementById("player-name-input")
+    if (nameInput.value !== ""){
+        player.name = nameInput.value;
+        player.chips = 500;
+        playerEl.textContent = player.name + ": $" + player.chips;
+        nameInput.value = "";
+    }
+    startGame()
+}
 
 function getRandomCard() {
     let randomNumber = Math.floor(Math.random() * 13) + 1
