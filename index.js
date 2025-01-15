@@ -19,7 +19,7 @@ let playerEl = document.getElementById("player-el")
 playerEl.textContent = player.name + ": $" + player.chips
 
 function setPlayerName(){
-    const nameInput = document.getElementById("player-name-input")
+    const nameInput = document.getElementById("player-name-input");
     if (nameInput.value !== ""){
         player.name = nameInput.value;
         player.chips = 500;
@@ -96,6 +96,7 @@ function newCard() {
         renderGame()
     }
 }
+
 
 function dealerTurn() {
     // Dealer must draw cards until the sum is at least 17
