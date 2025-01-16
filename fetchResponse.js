@@ -24,11 +24,27 @@ let Id = ""
 //     console.log(data.cards[0].image)
 // }
 // deck(baseApi + newGame);
+async function startDeck (){  //i needed a way for when the game started it would grab a new deck with an id from the API
+    let response = await fetch (baseApi + newGame);
+    let data = await response.json();
+    Id = data.deck_id;
+    console.log("Deck ID:", Id);
+}
+startDeck();
 
-async function deck(link){
+
+async function deck(link){ // the idea was that i needed to draw cards from the deck for whenever the player chooses to draw a card 
     let drawCard = `/${Id}/draw/?count=${link}`;
     let response = await fetch (baseApi + drawCard);
     let data = await response.json();
+    // console.log("Drawn Cards:", data.cards);
     return data.cards;
 }
+// i needed to see if the second function was working by calling the first function with the new deck 
+// async function test(){
+//     await startDeck();
+//     const cards = await deck(2);
+//     console.log("test:", cards)
+// }
+// test()
 

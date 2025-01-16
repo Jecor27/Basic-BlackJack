@@ -1,7 +1,5 @@
-let player = {
-    name: "Player",
-    chips: 500
-}
+import { Player } from './player.js'
+// console.log(player)
 
 let cards = []
 let sum = 0
@@ -16,14 +14,14 @@ let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
 
-playerEl.textContent = player.name + ": $" + player.chips
+playerEl.textContent = Player.name + ": $" + Player.chips
 
 function setPlayerName(){
     const nameInput = document.getElementById("player-name-input");
     if (nameInput.value !== ""){
-        player.name = nameInput.value;
-        player.chips = 500;
-        playerEl.textContent = player.name + ": $" + player.chips;
+        Player.name = nameInput.value;
+        Player.chips = 500;
+        playerEl.textContent = Player.name + ": $" + Player.chips;
         nameInput.value = "";
     }
     startGame()
@@ -118,13 +116,13 @@ function dealerTurn() {
 function determineWinner() {
     if (dealerSum > 21 || sum > dealerSum && sum <= 21) {
         message = "You win!"
-        player.chips += 50
+        Player.chips += 50
     } else if (sum > 21 || dealerSum > sum) {
         message = "Dealer wins!"
-        player.chips -= 50
+        Player.chips -= 50
     } else if (sum === dealerSum) {
         message = "It's a tie!"
     }
     messageEl.textContent = message
-    playerEl.textContent = player.name + ": $" + player.chips
+    playerEl.textContent = Player.name + ": $" + Player.chips
 }

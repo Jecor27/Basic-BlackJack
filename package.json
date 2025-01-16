@@ -1,0 +1,14 @@
+{
+  "name": "blackjack",
+  "version": "1.0.0",
+  "description": "A blackjack game using ES modules",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Jesus Corrales",
+  "license": "ISC"
+}
