@@ -1,6 +1,6 @@
-let baseApi = "https://deckofcardsapi.com/api/deck"
-let newGame = "/new/shuffle/?deck_count=6"
-let Id = ""
+export let baseApi = "https://deckofcardsapi.com/api/deck"
+export let newGame = "/new/shuffle/?deck_count=6"
+export let Id = ""
 // let draw = `/${Id}/draw/?count=2`
 // async function deck(link) {
 //     let response = await fetch(link)
@@ -24,7 +24,7 @@ let Id = ""
 //     console.log(data.cards[0].image)
 // }
 // deck(baseApi + newGame);
-async function startDeck (){  //i needed a way for when the game started it would grab a new deck with an id from the API
+export async function startDeck (){  //i needed a way for when the game started it would grab a new deck with an id from the API
     let response = await fetch (baseApi + newGame);
     let data = await response.json();
     Id = data.deck_id;
@@ -33,7 +33,7 @@ async function startDeck (){  //i needed a way for when the game started it woul
 startDeck();
 
 
-async function deck(link){ // the idea was that i needed to draw cards from the deck for whenever the player chooses to draw a card 
+export async function deck(link){ // the idea was that i needed to draw cards from the deck for whenever the player chooses to draw a card 
     let drawCard = `/${Id}/draw/?count=${link}`;
     let response = await fetch (baseApi + drawCard);
     let data = await response.json();
@@ -48,3 +48,11 @@ async function deck(link){ // the idea was that i needed to draw cards from the 
 // }
 // test()
 
+//trying to export everything
+export default {
+    baseApi,
+    newGame,
+    Id,
+    startDeck,
+    deck
+};
