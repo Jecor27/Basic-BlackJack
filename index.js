@@ -72,13 +72,21 @@ function sumCard(cards) {
     let sum = 0;
     let aces = 0;
     cards.forEach((card) => {
+        console.log("Card value:", card.value);
         if (card.value === "ACE") {
             sum += 11;
             aces++;
-        } else if (["KING, QUEEN", "JACK"].includes(card.value)) {
+        } else if (["JACK"].includes(card.value)) {
+            console.log("Face card recognized: ", card.value);
+            sum += 10;
+        } else if (["QUEEN"].includes(card.value)) {
+            console.log("Face card recognized: ", card.value);
+            sum += 10;
+        } else if (["KING"].includes(card.value)) {
+            console.log("Face card recognized: ", card.value);
             sum += 10;
         } else {
-            sum += Number(card.value)
+            sum += Number(card.value) || 0;
         }
     })
     while (sum > 21 && aces > 0) {
@@ -184,12 +192,12 @@ function determineWinner() {
 
 function stay() {
     if (isAlive) {
-      dealerTurn();
+        dealerTurn();
     }
     console.log("stay")
-  }
-  Stay.addEventListener("click", stay)
-/* 
+}
+Stay.addEventListener("click", stay)
+/*
 exporting to startgame.js
  */
 // export default {
