@@ -1,6 +1,6 @@
 # Basic-BlackJack
 Description:
-A game based of the card game BlackJack where the use can input the name if they choose to and start the game with a dealer bot. the game will run based on who gets black or if the either the player or the dealer busts. 
+A game based of the card game BlackJack where the user can input a  name if they choose to and start the game with a dealer bot. the game will run, based on who gets black or if the either the player or the dealer busts. 
 
 Requirements
  Use the fetch API or Axios to communicate with an external web API. Use the data provided by this API to populate your application's content and features. 20%
