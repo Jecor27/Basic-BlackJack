@@ -1,6 +1,6 @@
 import { Player } from './player.js'
-import api  from './fetchResponse.js';
-import { startGame } from './startGame.js'
+import api from './fetchResponse.js';
+console.log(api.startDeck)
 
 // console.log(player)
 
@@ -18,14 +18,18 @@ let sumEl = document.getElementById("sum-el")
 let cardsEl = document.getElementById("cards-el")
 let playerEl = document.getElementById("player-el")
 let startGameButton = document.getElementById("startGame")
+let newCards = document.getElementById("newCard")
+let Stay = document.getElementById("stay")
 
 playerEl.textContent = Player.name + ": $" + Player.chips
 console.log(hasBlackJack)
 
 
-function setPlayerName(){
+
+
+function setPlayerName() {
     const nameInput = document.getElementById("player-name-input");
-    if (nameInput.value !== ""){
+    if (nameInput.value !== "") {
         Player.name = nameInput.value;
         Player.chips = 500;
         playerEl.textContent = Player.name + ": $" + Player.chips;
@@ -48,6 +52,44 @@ startGameButton.addEventListener("click", setPlayerName);
 // }
 
 
+async function startGame() {
+    isAlive = true;
+    hasBlackJack = false;
+    //console.log(isAlive);
+
+    let cards = await api.deck(3);
+    console.log("test: ", cards)
+    playerCards = [cards[0], cards[1]];
+    dealerCards = [cards[2]];
+
+    sum = sumCard(playerCards)
+    dealerSum = sumCard(dealerCards)
+    console.log("Player: ", playerCards)
+    renderGame();
+}
+
+function sumCard(cards) {
+    let sum = 0;
+    let aces = 0;
+    cards.forEach((card) => {
+        if (card.value === "ACE") {
+            sum += 11;
+            aces++;
+        } else if (["KING, QUEEN", "JACK"].includes(card.value)) {
+            sum += 10;
+        } else {
+            sum += Number(card.value)
+        }
+    })
+    while (sum > 21 && aces > 0) {
+        sum -= 10;
+        aces--;
+    }
+
+    return sum;
+}
+
+
 function renderGame() {
     // Player's cards
     cardsEl.textContent = "Your Cards: ";
@@ -55,27 +97,27 @@ function renderGame() {
     // for (let i = 0; i < playerCards.length; i++) {
     //     cardsEl.textContent += playerCards[i] + " ";
     // }
-    playerCards.forEach((card)=> {
+    playerCards.forEach((card) => {
         let img = document.createElement("img");
-        img.src = card.img;
+        img.src = card.image;
         img.alt = card.code;
-        img.style.width = "80px";
+        img.style.width = "100px";
         cardsEl.appendChild(img);
     })
-    console.log(img)
-    sumEl.textContent = "Your Sum: " + sum;
+    //console.log(img)
+    sumEl.textContent = `Your Sum: ${sum}`;
 
     // Dealer's cards
-    dealerEl.textContent = "Dealer's Cards: ";
+    dealerEl.innerHTML = "Dealer's Cards: ";
     // for (let i = 0; i < dealerCards.length; i++) {
     //     dealerEl.textContent += dealerCards[i] + " ";
     // }
     dealerCards.forEach((card) => {
         let img = document.createElement("img");
-        img.src = card.img;
+        img.src = card.image;
         img.alt = card.code;
-        img.style.width = "80px";
-        cardsEl.appendChild(img);
+        img.style.width = "100px";
+        dealerEl.appendChild(img);
     })
 
     if (sum === 21) {
@@ -88,59 +130,74 @@ function renderGame() {
         dealerTurn();
     } else {
         message = "Do you want to draw a new card or stay?";
-      }
+    }
     messageEl.textContent = message;
 }
 
-function newCard() {
+async function newCard() {
     if (isAlive === true && hasBlackJack === false) {
-        let card = getRandomCard()
-        sum += card
-        playerCards.push(card)
+        let card = await api.deck(1);
+        playerCards.push(card[0]);
+        sum = sumCard(playerCards);
+        console.log(sum)
         renderGame()
     }
+    console.log("newcard")
 }
+newCards.addEventListener("click", newCard);
 
 
-function dealerTurn() {
+async function dealerTurn() {
     // Dealer must draw cards until the sum is at least 17
     while (dealerSum < 17) {
-        let card = getRandomCard();
-        dealerCards.push(card);
-        dealerSum += card;
-
-        // Update the dealer's displayed cards during each iteration
-        dealerEl.textContent = "Dealer's Cards: ";
-        for (let i = 0; i < dealerCards.length; i++) {
-            dealerEl.textContent += dealerCards[i] + " ";
-        }
+        let newCards = await api.deck(1);
+        dealerCards.push(newCards[0]);
+        dealerSum = sumCard(dealerCards);
     }
-
-    determineWinner(); // Determine the winner after the dealer finishes drawing
+    // Update the dealer's displayed cards during each iteration
+    dealerEl.textContent = "Dealer's Cards: ";
+    dealerCards.forEach((card) => {
+        let img = document.createElement("img");
+        img.src = card.image;
+        img.alt = card.code;
+        img.style.width = "100px";
+        cardsEl.appendChild(img);
+    })
+    messageEl.textContent = message;
+    playerEl.textContent = `${Player.name}: $${Player.chips}`;
 }
 
 function determineWinner() {
-    if (dealerSum > 21 || sum > dealerSum && sum <= 21) {
+    if (sum > dealerSum && sum <= 21) {
         message = "You win!"
         Player.chips += 50
-    } else if (sum > 21 || dealerSum > sum) {
+    } else if (dealerSum > sum && dealerSum <= 21) {
         message = "Dealer wins!"
         Player.chips -= 50
     } else if (sum === dealerSum) {
         message = "It's a tie!"
     }
+    isAlive = false;
     messageEl.textContent = message
     playerEl.textContent = Player.name + ": $" + Player.chips
 }
 
+function stay() {
+    if (isAlive) {
+      dealerTurn();
+    }
+    console.log("stay")
+  }
+  Stay.addEventListener("click", stay)
 /* 
 exporting to startgame.js
  */
-export default {
-    isAlive,
-    hasBlackJack,
-    playerCards,
-    dealerCards,
-    sum,
-    dealerSum
-}
+// export default {
+//     isAlive,
+//     hasBlackJack,
+//     playerCards,
+//     dealerCards,
+//     sum,
+//     dealerSum,
+//     renderGame
+// }
