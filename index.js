@@ -28,7 +28,7 @@ function setPlayerName(){
     if (nameInput.value !== ""){
         Player.name = nameInput.value;
         Player.chips = 500;
-        playerEl.textContent = Player.name + " $" + Player.chips;
+        playerEl.textContent = Player.name + ": $" + Player.chips;
         nameInput.value = "";
     }
     startGame()
@@ -51,30 +51,44 @@ startGameButton.addEventListener("click", setPlayerName);
 function renderGame() {
     // Player's cards
     cardsEl.textContent = "Your Cards: ";
-    for (let i = 0; i < playerCards.length; i++) {
-        cardsEl.textContent += playerCards[i] + " ";
-    }
+    // sice we are messing with an api i need to create a way for the images to render on to the page
+    // for (let i = 0; i < playerCards.length; i++) {
+    //     cardsEl.textContent += playerCards[i] + " ";
+    // }
+    playerCards.forEach((card)=> {
+        let img = document.createElement("img");
+        img.src = card.img;
+        img.alt = card.code;
+        img.style.width = "80px";
+        cardsEl.appendChild(img);
+    })
+    console.log(img)
     sumEl.textContent = "Your Sum: " + sum;
 
     // Dealer's cards
     dealerEl.textContent = "Dealer's Cards: ";
-    for (let i = 0; i < dealerCards.length; i++) {
-        dealerEl.textContent += dealerCards[i] + " ";
-    }
+    // for (let i = 0; i < dealerCards.length; i++) {
+    //     dealerEl.textContent += dealerCards[i] + " ";
+    // }
+    dealerCards.forEach((card) => {
+        let img = document.createElement("img");
+        img.src = card.img;
+        img.alt = card.code;
+        img.style.width = "80px";
+        cardsEl.appendChild(img);
+    })
 
-    if (sum <= 20) {
-        message = "Do you want to draw a new card?";
-    } else if (sum === 21) {
+    if (sum === 21) {
         message = "You've got Blackjack!";
         hasBlackJack = true;
-        dealerTurn(); // Dealer finishes their turn if the player gets 21
-        return;
-    } else {
+        dealerTurn();
+    } else if (sum > 21) {
         message = "You're out of the game!";
         isAlive = false;
-        dealerTurn(); // Dealer finishes their turn if the player is out, then returned to keep it from drawing more cards 
-        return; 
-    }
+        dealerTurn();
+    } else {
+        message = "Do you want to draw a new card or stay?";
+      }
     messageEl.textContent = message;
 }
 
@@ -119,6 +133,9 @@ function determineWinner() {
     playerEl.textContent = Player.name + ": $" + Player.chips
 }
 
+/* 
+exporting to startgame.js
+ */
 export default {
     isAlive,
     hasBlackJack,

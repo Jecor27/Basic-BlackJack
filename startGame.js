@@ -4,6 +4,7 @@ import api from './fetchResponse.js';
 export async function startGame() {
     getVar.isAlive = true;
     getVar.hasBlackJack = false;
+    console.log(getVar.isAlive);
 
     let cards = await api.deck(3);
     getVar.playerCards = [cards[0], cards[1]];

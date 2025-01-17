@@ -6,6 +6,6 @@
 //   }
 
 export const Player = {
-    name: "Please enter your name",
+    name: "Please enter your name, then press Start Game",
     chips: 500
   };
