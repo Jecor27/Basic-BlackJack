@@ -26,7 +26,7 @@ console.log(hasBlackJack)
 
 
 
-
+// input field for placing your name
 function setPlayerName() {
     const nameInput = document.getElementById("player-name-input");
     if (nameInput.value !== "") {
@@ -76,6 +76,8 @@ function sumCard(cards) {
         if (card.value === "ACE") {
             sum += 11;
             aces++;
+
+            //having it recognize the face cards have a value of 10 or else it would come back as NAN
         } else if (["JACK"].includes(card.value)) {
             console.log("Face card recognized: ", card.value);
             sum += 10;
@@ -86,7 +88,7 @@ function sumCard(cards) {
             console.log("Face card recognized: ", card.value);
             sum += 10;
         } else {
-            sum += Number(card.value) || 0;
+            sum += Number(card.value);
         }
     })
     while (sum > 21 && aces > 0) {
@@ -109,7 +111,7 @@ function renderGame() {
         let img = document.createElement("img");
         img.src = card.image;
         img.alt = card.code;
-        img.style.width = "100px";
+        img.style.width = "200px";
         cardsEl.appendChild(img);
     })
     //console.log(img)
@@ -124,7 +126,7 @@ function renderGame() {
         let img = document.createElement("img");
         img.src = card.image;
         img.alt = card.code;
-        img.style.width = "100px";
+        img.style.width = "200px";
         dealerEl.appendChild(img);
     })
 
@@ -168,13 +170,15 @@ async function dealerTurn() {
         let img = document.createElement("img");
         img.src = card.image;
         img.alt = card.code;
-        img.style.width = "100px";
-        cardsEl.appendChild(img);
+        img.style.width = "200px";
+        dealerEl.appendChild(img);
     })
     messageEl.textContent = message;
     playerEl.textContent = `${Player.name}: $${Player.chips}`;
 }
-
+//from old code for when i  was only using numbers, need to change it so it 
+// registers when the dealer is between 17 and 21 to stay instead of keep pulling a card. 
+// i was thinking of intergrating it into delerturn function to add a condition where it accounts for the tie.
 function determineWinner() {
     if (sum > dealerSum && sum <= 21) {
         message = "You win!"
@@ -189,7 +193,7 @@ function determineWinner() {
     messageEl.textContent = message
     playerEl.textContent = Player.name + ": $" + Player.chips
 }
-
+//was trying to add a stay button instead of having to keep pressing new card
 function stay() {
     if (isAlive) {
         dealerTurn();
