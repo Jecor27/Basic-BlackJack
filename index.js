@@ -3,7 +3,7 @@ import api from './fetchResponse.js';
 console.log(api.startDeck)
 
 // console.log(player)
-
+//will try to move all variables to a new file
 let playerCards = []
 let sum = 0
 let hasBlackJack = false
