@@ -158,6 +158,15 @@ async function dealerTurn() {
     dealerCards.push(newCards[0]);
     dealerSum = sumCard(dealerCards);
   }
+//added a condtion where if you choose to stay and the dealer is either at 17-21 the dealer can not draw
+//but will determine the winner instead so the condtion runs. 
+  if (dealerSum >= 17 && dealerSum <= 21) {
+    determineWinner();
+  } else if (dealerSum > 21) {
+    message = "Dealer busts! You win!";
+    Player.chips += 50;
+    isAlive = false;
+  }
   // Update the dealer's displayed cards during each iteration
   dealerEl.textContent = "Dealer's Cards: ";
   dealerCards.forEach((card) => {
