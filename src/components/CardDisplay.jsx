@@ -12,8 +12,8 @@ const CardDisplay = ({ label, cards, sum }) => {
           <img 
             key={index} 
             src={card.image} 
-            alt={card.code} 
-            style={{ width: "120px", margin: "0 5px" }} 
+            alt={card.code}
+            // Removed fixed width, now using CSS for responsive sizing
           />
         ))}
       </div>
