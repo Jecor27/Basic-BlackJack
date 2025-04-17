@@ -7,6 +7,7 @@ const useGameStore = create((set, get) => ({
   // Game initialization state
   gameStarted: false,
   bettingPhase: true,
+  gameOver: false,
   
   // Player state
   playerName: "Please enter your name, then press Start Game",
@@ -66,6 +67,14 @@ const useGameStore = create((set, get) => ({
       playerSum: 0,
       dealerSum: 0
     });
+  },
+  
+  // Check if player is out of chips (game over)
+  checkGameOver: () => {
+    const { playerChips } = get();
+    if (playerChips <= 0) {
+      set({ gameOver: true, bettingPhase: false, isAlive: false });
+    }
   },
   
   // Place bet and start the round
@@ -180,6 +189,7 @@ const useGameStore = create((set, get) => ({
           isAlive: false,
           bettingPhase: true
         });
+        get().checkGameOver();
       } else {
         get().determineWinner();
       }
@@ -208,6 +218,7 @@ const useGameStore = create((set, get) => ({
         isAlive: false,
         bettingPhase: true
       });
+      get().checkGameOver();
     } else if (playerSum === dealerSum) {
       // Tie
       set({
@@ -226,7 +237,24 @@ const useGameStore = create((set, get) => ({
     }
   },
   
-  // Reset the game to the welcome screen
+  // Reset game with same player (keep the name but restore chips)
+  restartGame: () => {
+    set({
+      playerChips: 500,
+      playerCards: [],
+      playerSum: 0,
+      dealerCards: [],
+      dealerSum: 0,
+      isAlive: false,
+      hasBlackJack: false,
+      gameMessage: "Welcome back! Place your bet to start a new game.",
+      currentBet: 50,
+      bettingPhase: true,
+      gameOver: false
+    });
+  },
+  
+  // Reset the game completely and go to welcome screen
   resetGame: () => {
     set({
       gameStarted: false,
@@ -240,7 +268,8 @@ const useGameStore = create((set, get) => ({
       hasBlackJack: false,
       gameMessage: "Want to play a round?",
       currentBet: 50,
-      bettingPhase: true
+      bettingPhase: true,
+      gameOver: false
     });
   }
 }));

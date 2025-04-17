@@ -2,14 +2,14 @@ import React from 'react';
 import useGameStore from '../store/gameStore';
 
 const GameOver = () => {
-  const { playerName, resetGame } = useGameStore();
+  const { playerName, resetGame, restartGame } = useGameStore();
 
-  // Handle restart game button click
+  // Handle restart game button click - keep the same player name
   const handleRestart = () => {
-    resetGame();
+    restartGame();
   };
 
-  // Handle new player button click
+  // Handle new player button click - go back to welcome screen
   const handleNewPlayer = () => {
     resetGame();
   };
@@ -21,7 +21,7 @@ const GameOver = () => {
         
         <div className="game-over-message">
           <p>Sorry, {playerName}! You've run out of chips.</p>
-          <p className="final-score">Final Score: $0</p>
+          <p className="final-score">You are now broke: $0</p>
         </div>
 
         <div className="game-over-buttons">

@@ -12,6 +12,9 @@ const BettingControls = () => {
   const handleBetChange = (e) => {
     const value = parseInt(e.target.value, 10);
     setInputBet(isNaN(value) ? '' : value);
+    if (!isNaN(value) && value > 0 && value <= playerChips) {
+      setBet(value);
+    }
   };
 
   const handlePlaceBet = () => {
@@ -23,7 +26,12 @@ const BettingControls = () => {
     }
     
     if (betAmount > playerChips) {
-      setError(`You only have $${playerChips} chips available`);
+      setError(`You only have ${playerChips} chips available`);
+      return;
+    }
+    
+    if (playerChips <= 0) {
+      setError("You're out of chips! Game over!");
       return;
     }
     

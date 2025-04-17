@@ -4,6 +4,7 @@ import Controls from './components/controls';
 import GameMessage from './components/GameMessage';
 import WelcomeScreen from './components/WelcomeScreen';
 import BettingControls from './components/BettingControls';
+import GameOver from './components/GameOver';
 import useGameStore from './store/gameStore';
 import './App.css';
 
@@ -18,7 +19,8 @@ function App() {
     dealerCards, 
     dealerSum,
     gameStarted,
-    bettingPhase
+    bettingPhase,
+    gameOver
   } = useGameStore();
 
   // Initialize the deck when the app loads
@@ -35,24 +37,30 @@ function App() {
         <>
           <h1>Blackjack</h1>
           
-          <GameMessage />
-          
-          <CardDisplay 
-            label="Dealer's Cards:" 
-            cards={dealerCards} 
-            sum={dealerSum}
-          />
-          
-          <CardDisplay 
-            label="Your Cards:" 
-            cards={playerCards} 
-            sum={playerSum}
-          />
-          
-          {bettingPhase ? (
-            <BettingControls />
+          {gameOver ? (
+            <GameOver />
           ) : (
-            <Controls />
+            <>
+              <GameMessage />
+              
+              <CardDisplay 
+                label="Dealer's Cards:" 
+                cards={dealerCards} 
+                sum={dealerSum}
+              />
+              
+              <CardDisplay 
+                label="Your Cards:" 
+                cards={playerCards} 
+                sum={playerSum}
+              />
+              
+              {bettingPhase ? (
+                <BettingControls />
+              ) : (
+                <Controls />
+              )}
+            </>
           )}
         </>
       )}

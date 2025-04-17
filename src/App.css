@@ -1,4 +1,83 @@
-.App {
+/* Game Over Screen Styles */
+.game-over-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+  }
+  
+  .game-over-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 3px solid #ca3131;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .game-over-content h2 {
+    color: #ca3131;
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .game-over-message {
+    margin-bottom: 30px;
+  }
+  
+  .game-over-message p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .final-score {
+    font-size: 1.8rem !important;
+    color: goldenrod;
+    font-weight: bold;
+    margin-top: 20px !important;
+  }
+  
+  .game-over-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .restart-button, .new-player-button {
+    margin: 10px;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    width: auto;
+  }
+  
+  .restart-button {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .restart-button:hover {
+    background-color: #45a049;
+  }
+  
+  .new-player-button {
+    background-color: #2196F3;
+    color: white;
+  }
+  
+  .new-player-button:hover {
+    background-color: #0b7dda;
+  }.App {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
