@@ -1,0 +1,260 @@
+.App {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .card-display {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-display p {
+    color: goldenrod;
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  
+  .cards-container img {
+    border-radius: 8px;
+    margin: 0 5px 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+  }
+  
+  .cards-container img:hover {
+    transform: translateY(-5px);
+  }
+  
+  .buttons {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    color: #016f32;
+    width: 150px;
+    background: goldenrod;
+    padding: 10px 0;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s;
+  }
+  
+  button:hover {
+    background: #e6c450;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .reset-button {
+    background-color: #ca3131;
+    color: white;
+    margin-top: 15px;
+  }
+  
+  .reset-button:hover {
+    background-color: #e04444;
+  }
+  
+  /* Game Message Styles */
+  .game-messages {
+    margin: 15px 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  #message-el {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  #player-el {
+    font-size: 1.1rem;
+    color: goldenrod;
+    margin-bottom: 5px;
+  }
+  
+  #bet-el {
+    font-size: 1.1rem;
+    color: #4caf50;
+    font-weight: bold;
+  }
+  
+  /* Welcome Screen Styles */
+  .welcome-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 75vh;
+  }
+  
+  .welcome-content {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(184, 134, 11, 0.5);
+  }
+  
+  .welcome-message {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .name-input-container {
+    margin-bottom: 25px;
+  }
+  
+  .name-input-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: goldenrod;
+  }
+  
+  .name-input-container input {
+    width: 60%;
+    max-width: 250px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid goldenrod;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+    margin: 0 auto 5px auto;
+    display: block;
+  }
+  
+  .error-message {
+    color: #ff6b6b;
+    font-style: italic;
+    margin-top: 5px;
+  }
+  
+  .start-button {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    width: auto;
+    margin-top: 10px;
+  }
+  
+  /* Betting Controls Styles */
+  .betting-controls {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(184, 134, 11, 0.5);
+  }
+  
+  .betting-controls h3 {
+    color: goldenrod;
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .bet-input-container {
+    margin-bottom: 15px;
+  }
+  
+  .bet-input-container label {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 1rem;
+    color: #e0e0e0;
+  }
+  
+  .bet-input-container input {
+    width: 80px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 2px solid goldenrod;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+  }
+  
+  .quick-bet-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  .quick-bet-btn {
+    margin: 5px;
+    width: 70px;
+    font-size: 0.9rem;
+  }
+  
+  .place-bet-btn {
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    width: auto;
+    display: block;
+    margin: 15px auto;
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .place-bet-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .chips-display {
+    font-size: 1.1rem;
+    color: goldenrod;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+  
+  /* Controls */
+  .controls {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
