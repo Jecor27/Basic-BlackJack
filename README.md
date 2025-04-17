@@ -25,6 +25,7 @@ Requirements
  Include a README file that contains a description of your application 2%
  
  Level of effort displayed in creativity, presentation, and user experience 5%
+ ..
 
 
 
